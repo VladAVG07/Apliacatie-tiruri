@@ -13,11 +13,11 @@
     <property name="activa" type="int">
       <column name="ACTIVA" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="false" name="tiruri" table="TIRURI">
+    <set fetch="select" inverse="true" lazy="false" name="modele" table="MODELE">
       <key>
         <column name="MARCA" not-null="true"/>
       </key>
-      <one-to-many class="models.Tir"/>
+      <one-to-many class="models.Model"/>
     </set>
   </class>
 </hibernate-mapping>

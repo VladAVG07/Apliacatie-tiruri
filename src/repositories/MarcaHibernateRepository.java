@@ -7,6 +7,7 @@ package repositories;
 
 import java.util.ArrayList;
 import models.Marca;
+import models.Model;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import utils.HibernateUtil;
@@ -58,10 +59,33 @@ public class MarcaHibernateRepository implements MarcaRepository {
         tx.commit();
         return listaMarci;
     }
-    
-    public static void main(String[] args) {
-        MarcaRepository marcaRepository = new MarcaHibernateRepository();
-        System.out.println(marcaRepository.getAll());
+
+    @Override
+    public ArrayList<Model> getModele(Marca marca) {
+        ArrayList<Model> listaModele = null;
+        org.hibernate.Transaction tx = session.beginTransaction();
+        String hql = "from Modele m where m.marca=:marca";
+        listaModele = (ArrayList<Model>) session.createQuery(hql).setParameter("marca", marca).list();
+        tx.commit();
+        return listaModele;
     }
 
+    @Override
+    public Marca getMarcaById(int id) {
+        Marca marca = null;
+        org.hibernate.Transaction tx = session.beginTransaction();
+        String hql = "from Marca m where m.id=:id";
+        marca = (Marca) session.createQuery(hql)
+                .setParameter("id", id).uniqueResult();
+        tx.commit();
+        return marca;
+    }
+
+    public static void main(String[] args) {
+        MarcaRepository marcaRepository = new MarcaHibernateRepository();
+        //System.out.println(marcaRepository.getMarcaById(1).getModele());
+        Marca marca = new Marca();
+        marca.setId(1);
+        System.out.println(marcaRepository.getModele(marca));
+    }
 }

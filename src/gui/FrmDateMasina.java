@@ -23,6 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import models.Marca;
+import models.Model;
 //import models.Model;
 import models.Tir;
 
@@ -83,7 +84,7 @@ public class FrmDateMasina extends javax.swing.JDialog {
         if (tirSelectat.length > 0) {
             this.tirSelectat = tirSelectat[0];
             txtNrInmatriculare.setText(this.tirSelectat.getNrInmatriculare());
-            dropDownMarca.setSelectedItem(this.tirSelectat.getMarca());
+            dropDownMarca.setSelectedItem(this.tirSelectat.getModel().getMarca());
             dropDownModel.setSelectedItem(this.tirSelectat.getModel());
 //            for(File f : this.tirSelectat.getPoze()) {
 //                listaFisiere.add(f);
@@ -377,8 +378,8 @@ public class FrmDateMasina extends javax.swing.JDialog {
             if (tirSelectat != null) {
                 tir.setId(tirSelectat.getId());
             }
-            tir.setMarca((Marca) dropDownMarca.getSelectedItem());
-            //tir.setModel((Model) dropDownModel.getSelectedItem());
+           // tir.setMarca((Marca) dropDownMarca.getSelectedItem());
+            tir.setModel((Model) dropDownModel.getSelectedItem());
             tir.setNrInmatriculare(txtNrInmatriculare.getText());
             //tir.setPoze(listaPozeDeAfisat);
             //tir.setFolderPoze(pozeTir);

@@ -14,21 +14,19 @@ public class Tir  implements java.io.Serializable {
 
 
      private int id;
-     private int idMarca;
-     private String model;
+     private Model model;
+    
      private String nrInmatriculare;
      private int idStare;
-     private Marca marca;
      private Stare stare;
      private Set<SoferiTiruri> soferiTiruri = new HashSet<SoferiTiruri>(0);
 
     public Tir() {
     }
 
-    public Tir(int id, int idMarca, String model, String nrInmatriculare, int idStare) {
+    public Tir(int id, String model, String nrInmatriculare, int idStare) {
        this.id = id;
-       this.idMarca = idMarca;
-       this.model = model;
+      
        this.nrInmatriculare = nrInmatriculare;
        this.idStare = idStare;
     }
@@ -40,20 +38,9 @@ public class Tir  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public int getIdMarca() {
-        return this.idMarca;
-    }
+ 
     
-    public void setIdMarca(int idMarca) {
-        this.idMarca = idMarca;
-    }
-    public String getModel() {
-        return this.model;
-    }
     
-    public void setModel(String model) {
-        this.model = model;
-    }
     public String getNrInmatriculare() {
         return this.nrInmatriculare;
     }
@@ -69,16 +56,7 @@ public class Tir  implements java.io.Serializable {
         this.idStare = idStare;
     }
 
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-        if (marca!=null){
-            this.idMarca = marca.getId();
-        }
-    }
+   
 
     public Stare getStare() {
         return stare;
@@ -97,6 +75,14 @@ public class Tir  implements java.io.Serializable {
 
     public void setSoferiTiruri(Set<SoferiTiruri> soferiTiruri) {
         this.soferiTiruri = soferiTiruri;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 
 

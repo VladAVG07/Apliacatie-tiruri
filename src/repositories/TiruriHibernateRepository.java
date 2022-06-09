@@ -63,17 +63,7 @@ public class TiruriHibernateRepository implements TiruriRepository {
         return listaTiruri;
     }
 
-    @Override
-    public ArrayList<Tir> getTirByMarca(Marca marca) {
-        ArrayList<Tir> listaTiruri = new ArrayList<>();
-        org.hibernate.Transaction tx = session.beginTransaction();
-        Tir t = new Tir();
-        t.setMarca(marca);
-        Query q = session.createQuery("from Tir where marca= :marca").setProperties(t);
-        listaTiruri = (ArrayList<Tir>) q.list();
-        tx.commit();
-        return listaTiruri;
-    }
+    
 
     @Override
     public ArrayList<Tir> getTirByStare(Stare stare) {

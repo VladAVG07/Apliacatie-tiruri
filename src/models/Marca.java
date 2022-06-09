@@ -1,6 +1,7 @@
 package models;
 // Generated May 12, 2022 5:57:09 PM by Hibernate Tools 4.3.1
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,8 +17,9 @@ public class Marca  implements java.io.Serializable {
      private int id;
      private String nume;
      private int activa;
-     private Set<Tir> tiruri = new HashSet<Tir>(0);
-
+     private ArrayList<Model> listaModele;
+    // private Set<Tir> tiruri = new HashSet<Tir>(0);
+     private Set<Model> modele=new HashSet<>(0);
     public Marca() {
     }
 
@@ -26,8 +28,6 @@ public class Marca  implements java.io.Serializable {
         this.nume = nume;
     }
     
-    
-
     public Marca(int id, String nume, int activa) {
        this.id = id;
        this.nume = nume;
@@ -56,14 +56,22 @@ public class Marca  implements java.io.Serializable {
         this.activa = activa;
     }
 
-    public Set<Tir> getTiruri() {
-        return tiruri;
+//    public Set<Tir> getTiruri() {
+//        return tiruri;
+//    }
+//
+//    public void setTiruri(Set<Tir> tiruri) {
+//        this.tiruri = tiruri;
+//    }
+
+    public ArrayList<Model> getListaModele() {
+        return listaModele;
     }
 
-    public void setTiruri(Set<Tir> tiruri) {
-        this.tiruri = tiruri;
+    public void setListaModele(ArrayList<Model> listaModele) {
+        this.listaModele = listaModele;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -88,9 +96,20 @@ public class Marca  implements java.io.Serializable {
         return true;
     }
 
+    public void setModele(Set<Model> modele) {
+        this.modele = modele;
+    }
+
+    public Set<Model> getModele() {
+        return modele;
+    }
+    
     
 
-
+    @Override
+    public String toString() {
+        return "Marca{" + "id=" + id + ", nume=" + nume + ", activa=" + activa + '}';
+    }
 
 }
 

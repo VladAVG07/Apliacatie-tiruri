@@ -18,7 +18,7 @@ public interface TiruriService {
     public boolean adaugaTir(Tir tir);
     public void stergeTir(Tir tir);
     public ArrayList<Tir> getAll();
-    public ArrayList<Tir> getTirByMarca(Marca marca);
+   // public ArrayList<Tir> getTirByMarca(Marca marca);
     public ArrayList<Tir> getTirByStare(Stare stare);
     public ArrayList<Tir> getTirByNumarInmatriculare(String nrInmatriculare);
 }

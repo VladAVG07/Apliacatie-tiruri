@@ -35,10 +35,10 @@ public class TiruriServiceImpl implements TiruriService {
         return tiruriRepository.getAll();
     }
 
-    @Override
-    public ArrayList<Tir> getTirByMarca(Marca marca) {
-        return tiruriRepository.getTirByMarca(marca);
-    }
+//    @Override
+//    public ArrayList<Tir> getTirByMarca(Marca marca) {
+//        return tiruriRepository.getTirByMarca(marca);
+//    }
 
     @Override
     public ArrayList<Tir> getTirByStare(Stare stare) {

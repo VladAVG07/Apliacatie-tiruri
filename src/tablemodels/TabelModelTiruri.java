@@ -46,7 +46,7 @@ public class TabelModelTiruri extends AbstractTableModel {
             case 0:
                 return tir.getId();
             case 1:
-                return tir.getMarca();
+                return tir.getModel().getMarca().getNume();
             case 2:
                 return tir.getModel();
             case 3:
