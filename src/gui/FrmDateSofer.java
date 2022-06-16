@@ -218,7 +218,7 @@ public class FrmDateSofer extends javax.swing.JDialog {
             }
             
             Sofer sofer = new Sofer();
-            sofer.setId((int) (Math.random() * 10000));
+           // sofer.setId((int) (Math.random() * 10000));
             if(soferSelectat!=null){
                 sofer.setId(soferSelectat.getId());
             }
@@ -237,7 +237,6 @@ public class FrmDateSofer extends javax.swing.JDialog {
 
     private void txtCNPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNPKeyTyped
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtCNPKeyTyped
 
     public static void copyFile(File sourceFile, File destFile) throws IOException {

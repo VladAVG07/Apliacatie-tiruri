@@ -7,6 +7,7 @@ package repositories;
 
 import java.util.ArrayList;
 import models.Marca;
+import models.Model;
 import models.Stare;
 import models.Tir;
 import org.hibernate.Query;
@@ -66,7 +67,7 @@ public class TiruriHibernateRepository implements TiruriRepository {
     
 
     @Override
-    public ArrayList<Tir> getTirByStare(Stare stare) {
+    public ArrayList<Tir> getTiruriByStare(Stare stare) {
         ArrayList<Tir> listaTiruri = new ArrayList<>();
         org.hibernate.Transaction tx = session.beginTransaction();
         Tir t = new Tir();
@@ -78,24 +79,33 @@ public class TiruriHibernateRepository implements TiruriRepository {
     }
 
     @Override
-    public ArrayList<Tir> getTirByNumarInmatriculare(String nrInmatriculare) {
-        ArrayList<Tir> listaTiruri = new ArrayList<>();
+    public Tir getTirByNumarInmatriculare(String nrInmatriculare) {
         org.hibernate.Transaction tx = session.beginTransaction();
-        Tir tir = new Tir();
-        tir.setNrInmatriculare(nrInmatriculare);
-        Query q = session.createQuery("from Tir where nrInmatriculare= :nrInmatriculare").setProperties(tir);
-        listaTiruri = (ArrayList<Tir>) q.list();
+        Tir tir = null;
+        String hql = "from Tir t where t.nrInmatriculare = :nrInmatriculare";
+        tir = (Tir) session.createQuery(hql).setParameter("nrInmatriculare", nrInmatriculare).uniqueResult();
         tx.commit();
-        return listaTiruri;
+        return tir;
+    }
+    
+    @Override
+    public Tir getTirById(int id) {
+       Tir tir = null;
+       org.hibernate.Transaction tx = session.beginTransaction();
+       String hql = "from Tir t where t.id = :id";
+       tir = (Tir) session.createQuery(hql).setParameter("id", id).uniqueResult();
+       tx.commit();
+       return tir;
     }
     
     public static void main(String[] args) {
         TiruriRepository tiruriRepository = new TiruriHibernateRepository();
+        Model m = new Model();
+        m.setId(4);
         Stare s = new Stare();
-        Marca marca = new Marca();
-        marca.setId(1);
-        s.setId(1);
-        System.out.println(tiruriRepository.getTirByStare(s));
+        s.setId(2);
+        tiruriRepository.adaugaTir(new Tir(m, "CL24DFL", s));
+        System.out.println(tiruriRepository.getAll());
     }
     
 }

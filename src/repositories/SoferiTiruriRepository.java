@@ -20,4 +20,5 @@ public interface SoferiTiruriRepository {
     public ArrayList<SoferiTiruri> getAll();
     public ArrayList<SoferiTiruri> getSoferiTiruriBySofer(Sofer sofer);
     public ArrayList<SoferiTiruri> getSoferiTiruriByTir(Tir tir);
+    public SoferiTiruri getSoferiTiruriById(int id);
 }

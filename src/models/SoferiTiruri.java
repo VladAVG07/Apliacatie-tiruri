@@ -18,9 +18,8 @@ public class SoferiTiruri implements java.io.Serializable {
 
     public SoferiTiruri() {
     }
-
-    public SoferiTiruri(int id, int idSofer, int idTir) {
-        this.id = id;
+    
+    public SoferiTiruri(int idSofer, int idTir) {
         this.idSofer = idSofer;
         this.idTir = idTir;
     }
@@ -77,6 +76,11 @@ public class SoferiTiruri implements java.io.Serializable {
 
     public void setInregistrari(Set<Inregistrare> inregistrari) {
         this.inregistrari = inregistrari;
+    }
+
+    @Override
+    public String toString() {
+        return "SoferiTiruri{" + "id=" + id + ", sofer=" + sofer + ", tir=" + tir + '}';
     }
 
 }

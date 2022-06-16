@@ -8,13 +8,31 @@ import javax.swing.JOptionPane;
 import models.Sofer;
 import models.Tir;
 import renderers.CellRendererImage;
+import services.MarcaService;
+import services.MarcaServiceImpl;
+import services.ModelService;
+import services.ModelServiceImpl;
+import services.SoferService;
+import services.SoferServiceImpl;
+import services.TiruriService;
+import services.TiruriServiceImpl;
 
 public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnSoferSaved , FrmDateMasina.OnTirSaved{
+    
+    private SoferService soferService;
+    private TiruriService tirService;
+    private ModelService modelService;
+    private MarcaService marcaService;
     
     public Administrare() {
         initComponents();
         tabelSoferi.getColumnModel().getColumn(4).setCellRenderer(new CellRendererImage());
-//        tabelTiruri.getColumnModel().getColumn(4).setCellRenderer(new CellRendererImage());
+//      tabelTiruri.getColumnModel().getColumn(4).setCellRenderer(new CellRendererImage());
+        this.soferService = new SoferServiceImpl();
+        this.tirService = new TiruriServiceImpl();
+        this.modelService = new ModelServiceImpl();
+        this.marcaService = new MarcaServiceImpl();
+        tableModelSoferi1.setListaSoferi(soferService.getAll());
     }
 
     /**
@@ -216,9 +234,9 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
             JOptionPane.showMessageDialog(this, "Va rog selectati un sofer!");
             return;
         }
-//        tableModelSoferi1.getSoferAtIdex(index).getPoza().delete();
+//      tableModelSoferi1.getSoferAtIdex(index).getPoza().delete();
         FrmDateSofer f = new FrmDateSofer(new javax.swing.JFrame(), true,tableModelSoferi1.getSoferAtIdex(index));
-        
+        System.out.println(tableModelSoferi1.getSoferAtIdex(index));
         f.setOnSoferSaved(this);
         f.setVisible(true);      
     }//GEN-LAST:event_btnEditeazaSoferiActionPerformed
@@ -232,7 +250,7 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
         
         int confirmValue = JOptionPane.showConfirmDialog(this, "Esti sigur ca vrei sa stergi linia?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(confirmValue == JOptionPane.YES_OPTION) {
-//            tableModelSoferi1.getSoferAtIdex(index).getPoza().delete();
+            soferService.stergeSofer(tableModelSoferi1.getSoferAtIdex(index));
             tableModelSoferi1.getListaSoferi().remove(index);
             tableModelSoferi1.fireTableDataChanged();
         }
@@ -295,13 +313,12 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
 
     @Override
     public void saveSofer(Sofer sofer) {
-        System.out.println(sofer);
         tableModelSoferi1.addSofer(sofer);
+        soferService.adaugaSofer(sofer);
     }
 
     @Override
     public void saveTir(Tir tir) {
         tabelModelTiruri1.addTir(tir);
-        System.out.println(tir);
     }
 }

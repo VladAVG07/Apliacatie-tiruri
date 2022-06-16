@@ -10,13 +10,13 @@
     <property name="nrInmatriculare" type="string">
       <column length="7" name="NR_INMATRICULARE" not-null="true" unique="true"/>
     </property>
-    <property name="idStare" type="int">
+<!--    <property name="idStare" type="int">
       <column name="STARE" not-null="true"/>
-    </property>
-    <many-to-one class="models.Model" fetch="select" insert="false" name="model" update="false">
+    </property>-->
+    <many-to-one class="models.Model" fetch="select" name="model">
       <column name="MODEL" not-null="true"/>
     </many-to-one>
-    <many-to-one class="models.Stare" fetch="select" insert="false" name="stare" update="false">
+    <many-to-one class="models.Stare" fetch="select" name="stare">
       <column name="STARE" not-null="true"/>
     </many-to-one>
     <set fetch="select" inverse="true" lazy="false" name="soferiTiruri" table="SOFERI_TIRURI">

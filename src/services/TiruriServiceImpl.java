@@ -41,13 +41,18 @@ public class TiruriServiceImpl implements TiruriService {
 //    }
 
     @Override
-    public ArrayList<Tir> getTirByStare(Stare stare) {
-        return tiruriRepository.getTirByStare(stare);
+    public ArrayList<Tir> getTiruriByStare(Stare stare) {
+        return tiruriRepository.getTiruriByStare(stare);
     }
 
     @Override
-    public ArrayList<Tir> getTirByNumarInmatriculare(String nrInmatriculare) {
+    public Tir getTirByNumarInmatriculare(String nrInmatriculare) {
         return tiruriRepository.getTirByNumarInmatriculare(nrInmatriculare);
+    }
+
+    @Override
+    public Tir getTirById(int id) {
+        return tiruriRepository.getTirById(id);
     }
     
 }

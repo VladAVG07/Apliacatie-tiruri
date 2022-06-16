@@ -87,11 +87,24 @@ public class SoferiTiruriHibernateRepository implements SoferiTiruriRepository {
         return listaSoferiTiruri;
     }
     
+    @Override
+    public SoferiTiruri getSoferiTiruriById(int id) {
+        SoferiTiruri sf = null;
+        org.hibernate.Transaction tx = session.beginTransaction();
+        String hql = "from SoferiTiruri sf where sf.id = :id";
+        sf = (SoferiTiruri) session.createQuery(hql).setParameter("id", id).uniqueResult();
+        tx.commit();
+        return sf;
+    }
+   
     public static void main(String[] args) {
         SoferiTiruriRepository soferiTiruriRepository = new SoferiTiruriHibernateRepository();
         Tir t = new Tir();
-        t.setId(1);
-        System.out.println(soferiTiruriRepository.getAll());
-    }
-    
+        t.setId(17);
+        Sofer s = new Sofer();
+        s.setId(1);
+//        soferiTiruriRepository.adaugaSoferTir(new SoferiTiruri(s.getId() , t.getId()));
+//        System.out.println(soferiTiruriRepository.getAll());
+          System.out.println(soferiTiruriRepository.getSoferiTiruriBySofer(s));
+    }    
 }

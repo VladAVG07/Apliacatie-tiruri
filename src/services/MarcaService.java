@@ -7,6 +7,7 @@ package services;
 
 import java.util.ArrayList;
 import models.Marca;
+import models.Model;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface MarcaService {
     public boolean adaugaMarca(Marca marca);
     public void stergeMarca(Marca marca);
     public ArrayList<Marca> getAll();
+    public ArrayList<Model> getModele(Marca marca);
+    public Marca getMarcaById(int id);
 }

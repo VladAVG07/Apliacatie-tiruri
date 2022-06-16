@@ -19,7 +19,7 @@ public class SoferServiceImpl implements SoferService{
     private final SoferiRepository soferiRepository = new SoferiHibernateRepository();
     
     @Override
-    public boolean salveazaSofer(Sofer sofer) {
+    public boolean adaugaSofer(Sofer sofer) {
         return soferiRepository.adaugaSofer(sofer);
     }
 
@@ -31,6 +31,16 @@ public class SoferServiceImpl implements SoferService{
     @Override
     public ArrayList<Sofer> getAll() {
         return soferiRepository.getAll();
+    }
+
+    @Override
+    public Sofer getSoferById(int id) {
+       return soferiRepository.getSoferById(id);
+    }
+
+    @Override
+    public Sofer getSoferByCNP(String cnp) {
+        return soferiRepository.getSoferByCNP(cnp);
     }
     
 }

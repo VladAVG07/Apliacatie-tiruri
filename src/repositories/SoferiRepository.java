@@ -15,5 +15,7 @@ import models.Sofer;
 public interface SoferiRepository {
     public boolean adaugaSofer(Sofer sofer);
     public void stergeSofer(Sofer sofer);
+    public Sofer getSoferById(int id);
+    public Sofer getSoferByCNP(String cnp);
     public ArrayList<Sofer> getAll();
 }

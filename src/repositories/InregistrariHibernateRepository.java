@@ -109,9 +109,20 @@ public class InregistrariHibernateRepository implements InregistrariRepository{
         return listaInregistrari;
     }
     
+    @Override
+    public Inregistrare getInregistrareById(int id) {
+        Inregistrare inregistrare = null;
+        org.hibernate.Transaction tx = session.beginTransaction();
+        String hql = "from Inregistrare i where i.id = :id";
+        inregistrare = (Inregistrare) session.createQuery(hql).setParameter("id", id).uniqueResult();
+        tx.commit();
+        return inregistrare;
+    }
+    
     public static void main(String[] args) {
         InregistrariRepository inregistrariRepository = new InregistrariHibernateRepository();
         System.out.println(inregistrariRepository.getInregistrareByNoPlecare());
     }
+
     
 }

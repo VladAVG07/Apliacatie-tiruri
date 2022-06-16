@@ -24,8 +24,7 @@ public class Sofer  implements java.io.Serializable {
     public Sofer() {
     }
 
-    public Sofer(int id, String nume, String prenume, String cnp, String imagepath) {
-       this.id = id;
+    public Sofer(String nume, String prenume, String cnp, String imagepath) {
        this.nume = nume;
        this.prenume = prenume;
        this.cnp = cnp;

@@ -374,7 +374,6 @@ public class FrmDateMasina extends javax.swing.JDialog {
             }
 
             Tir tir = new Tir();
-            tir.setId((int) (Math.random() * 10000));
             if (tirSelectat != null) {
                 tir.setId(tirSelectat.getId());
             }

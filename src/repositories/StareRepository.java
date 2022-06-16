@@ -15,5 +15,6 @@ import models.Stare;
 public interface StareRepository {
     public boolean adaugaStare(Stare stare);
     public void stergeStare(Stare stare);
+    public Stare getStareById(int id);
     public ArrayList<Stare> getAll();
 }

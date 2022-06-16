@@ -13,7 +13,9 @@ import models.Sofer;
  * @author Stefan
  */
 public interface SoferService {
-    public boolean salveazaSofer(Sofer sofer);
+    public boolean adaugaSofer(Sofer sofer);
     public void stergeSofer(Sofer sofer);
+    public Sofer getSoferById(int id);
+    public Sofer getSoferByCNP(String cnp);
     public ArrayList<Sofer> getAll();
 }

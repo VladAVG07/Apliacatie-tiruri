@@ -64,7 +64,7 @@ public class MarcaHibernateRepository implements MarcaRepository {
     public ArrayList<Model> getModele(Marca marca) {
         ArrayList<Model> listaModele = null;
         org.hibernate.Transaction tx = session.beginTransaction();
-        String hql = "from Modele m where m.marca=:marca";
+        String hql = "from Model m where m.marca=:marca";
         listaModele = (ArrayList<Model>) session.createQuery(hql).setParameter("marca", marca).list();
         tx.commit();
         return listaModele;

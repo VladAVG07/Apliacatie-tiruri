@@ -57,7 +57,7 @@ public class ModelHibernateRepository implements ModelRepository{
     public ArrayList<Model> getAll() {
         ArrayList<Model> listaModele = new ArrayList<>();
         org.hibernate.Transaction tx = session.beginTransaction();
-        Query q = session.createQuery("from Modele");
+        Query q = session.createQuery("from Model");
         listaModele = (ArrayList<Model>) q.list();
         tx.commit();
         return listaModele;
@@ -68,7 +68,7 @@ public class ModelHibernateRepository implements ModelRepository{
     public Model getModelById(int id) {
         Model model = null;
         org.hibernate.Transaction tx = session.beginTransaction();
-        String hql = "from Modele m where m.id = :id";
+        String hql = "from Model m where m.id = :id";
         model = (Model) session.createQuery(hql).setParameter("id", id).uniqueResult();
         tx.commit();
         return model;
@@ -87,10 +87,10 @@ public class ModelHibernateRepository implements ModelRepository{
     
     public static void main(String[] args) {
         ModelRepository modelRepository = new ModelHibernateRepository();
-//        Marca marca=new Marca();
-//        marca.setId(1);
-//        modelRepository.adaugaModel(new Model(marca, "CLS"));
+        Marca marca=new Marca();
+        marca.setId(1);
+        //modelRepository.adaugaModel(new Model(marca, "C-CLASS"));
 //        System.out.println(modelRepository.getAll());
-//          System.out.println(modelRepository.getModelById(2).getTiruris());
+//          System.out.println(modelRepository.getModelById(4).getTiruris());
     }    
 }

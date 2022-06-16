@@ -15,20 +15,17 @@ public class Tir  implements java.io.Serializable {
 
      private int id;
      private Model model;
-    
      private String nrInmatriculare;
-     private int idStare;
      private Stare stare;
      private Set<SoferiTiruri> soferiTiruri = new HashSet<SoferiTiruri>(0);
 
     public Tir() {
     }
 
-    public Tir(int id, String model, String nrInmatriculare, int idStare) {
-       this.id = id;
-      
-       this.nrInmatriculare = nrInmatriculare;
-       this.idStare = idStare;
+    public Tir(Model model, String nrInmatriculare, Stare stare) {
+        this.model = model;
+        this.nrInmatriculare = nrInmatriculare;
+        this.stare = stare;
     }
    
     public int getId() {
@@ -38,8 +35,6 @@ public class Tir  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
- 
-    
     
     public String getNrInmatriculare() {
         return this.nrInmatriculare;
@@ -48,25 +43,16 @@ public class Tir  implements java.io.Serializable {
     public void setNrInmatriculare(String nrInmatriculare) {
         this.nrInmatriculare = nrInmatriculare;
     }
-    public int getIdStare() {
-        return this.idStare;
-    }
-    
-    public void setIdStare(int idStare) {
-        this.idStare = idStare;
-    }
-
-   
 
     public Stare getStare() {
         return stare;
     }
 
+
+    
+    
     public void setStare(Stare stare) {
         this.stare = stare;
-        if (stare!=null){
-            this.idStare = stare.getId();
-        }
     }
 
     public Set<SoferiTiruri> getSoferiTiruri() {
@@ -85,9 +71,10 @@ public class Tir  implements java.io.Serializable {
         this.model = model;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Tir{" + "id=" + id + ", model=" + model + ", nrInmatriculare=" + nrInmatriculare + ", stare=" + stare + '}';
+    }
 }
 
 

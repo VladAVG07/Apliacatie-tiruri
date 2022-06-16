@@ -61,9 +61,22 @@ public class StareHibernateRepository implements StareRepository {
         return listaStari;
     }
     
-    public static void main(String[] args) {
-        StareRepository stareRepository = new StareHibernateRepository();
-        System.out.println(stareRepository.getAll());
+    @Override
+    public Stare getStareById(int id) {
+       Stare stare = null;
+       org.hibernate.Transaction tx = session.beginTransaction();
+       String hql = "from Stare s where s.id = :id";
+       stare = (Stare) session.createQuery(hql).setParameter("id", id).uniqueResult();
+       tx.commit();
+       return stare;
     }
     
+    public static void main(String[] args) {
+        StareRepository stareRepository = new StareHibernateRepository();
+        Stare s = new Stare();
+        s.setNume("Activ");
+        s.setValid(1);
+        stareRepository.adaugaStare(s);
+        System.out.println(stareRepository.getAll());
+    }
 }

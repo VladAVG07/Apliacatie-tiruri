@@ -7,6 +7,7 @@ package services;
 
 import java.util.ArrayList;
 import models.Marca;
+import models.Model;
 import repositories.MarcaHibernateRepository;
 import repositories.MarcaRepository;
 
@@ -31,6 +32,16 @@ public class MarcaServiceImpl implements MarcaService {
     @Override
     public ArrayList<Marca> getAll() {
         return marcaRepository.getAll();
+    }
+
+    @Override
+    public ArrayList<Model> getModele(Marca marca) {
+        return marcaRepository.getModele(marca);
+    }
+
+    @Override
+    public Marca getMarcaById(int id) {
+        return marcaRepository.getMarcaById(id);
     }
     
 }

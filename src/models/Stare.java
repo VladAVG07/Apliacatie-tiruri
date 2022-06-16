@@ -81,9 +81,10 @@ public class Stare  implements java.io.Serializable {
         return true;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Stare{" + "id=" + id + ", nume=" + nume + ", valid=" + valid + '}';
+    }
 }
 
 
