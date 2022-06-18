@@ -26,13 +26,14 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
     
     public Administrare() {
         initComponents();
-        tabelSoferi.getColumnModel().getColumn(4).setCellRenderer(new CellRendererImage());
+        tabelSoferi.getColumnModel().getColumn(4).setCellRenderer(new CellRendererImage(4));
 //      tabelTiruri.getColumnModel().getColumn(4).setCellRenderer(new CellRendererImage());
         this.soferService = new SoferServiceImpl();
         this.tirService = new TiruriServiceImpl();
         this.modelService = new ModelServiceImpl();
         this.marcaService = new MarcaServiceImpl();
         tableModelSoferi1.setListaSoferi(soferService.getAll());
+        tabelModelTiruri1.setListaTiruri(tirService.getAll());
     }
 
     /**
@@ -201,7 +202,7 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
 //        }
 //        
 //        tabelModelTiruri1.getTirAtIndex(index).getFolderPoze().delete();
-        
+//        System.out.println(tabelModelTiruri1.getTirAtIndex(index));
         f.setOnTirSaved(this);
         f.setVisible(true);
     }//GEN-LAST:event_btnEditeazaTiruriActionPerformed
@@ -217,6 +218,7 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
 //            for(File f : tabelModelTiruri1.getTirAtIndex(index).getPoze()) {
 //                f.delete();
 //            }
+            tirService.stergeTir(tabelModelTiruri1.getTirAtIndex(index));
             tabelModelTiruri1.getListaTiruri().remove(index);
             tabelModelTiruri1.fireTableDataChanged();
         }
@@ -313,12 +315,15 @@ public class Administrare extends javax.swing.JFrame implements FrmDateSofer.OnS
 
     @Override
     public void saveSofer(Sofer sofer) {
-        tableModelSoferi1.addSofer(sofer);
+        int index=tabelSoferi.convertRowIndexToModel(tabelSoferi.getSelectedRow());
+        tableModelSoferi1.addSofer(sofer, index);
         soferService.adaugaSofer(sofer);
     }
 
     @Override
     public void saveTir(Tir tir) {
-        tabelModelTiruri1.addTir(tir);
+        int index = tabelTiruri.convertRowIndexToModel(tabelTiruri.getSelectedRow());
+        tabelModelTiruri1.addTir(tir, index);
+        tirService.adaugaTir(tir);
     }
 }

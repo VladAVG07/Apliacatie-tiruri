@@ -30,6 +30,7 @@ public class TiruriHibernateRepository implements TiruriRepository {
     
     @Override
     public boolean adaugaTir(Tir tir) {
+        session.clear();
         org.hibernate.Transaction tx = session.beginTransaction();
        
         if (tir!=null && tir.getId()>0){
@@ -44,6 +45,7 @@ public class TiruriHibernateRepository implements TiruriRepository {
         } else {
             tx.rollback();
         }
+        session.clear();
         return id > 0; 
     }
 

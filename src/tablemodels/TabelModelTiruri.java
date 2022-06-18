@@ -71,9 +71,7 @@ public class TabelModelTiruri extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void addTir(Tir tir) {
-        int index = listaTiruri.indexOf(tir);
-        
+    public void addTir(Tir tir, int index) {
         if(index == -1) {
             listaTiruri.add(tir);
         } else {

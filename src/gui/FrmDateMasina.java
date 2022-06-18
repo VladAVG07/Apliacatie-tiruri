@@ -24,21 +24,26 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import models.Marca;
 import models.Model;
-//import models.Model;
+import models.Stare;
 import models.Tir;
+import services.MarcaServiceImpl;
+import services.ModelServiceImpl;
 
 public class FrmDateMasina extends javax.swing.JDialog {
 
     /**
      * Creates new form FrmDateMasina
      */
+    private services.MarcaServiceImpl marcaService = new MarcaServiceImpl();
+    private services.ModelServiceImpl modelService = new ModelServiceImpl();
+    
     private ArrayList<ImageIcon> listaPoze;
     private int curImageIndex;
     private ArrayList<File> listaFisiere;
     private ArrayList<File> listaPozeDeAfisat;
     private Tir tirSelectat;
     private OnTirSaved onTirSaved;
-    //private Model selectatiModelul;
+    private Model selectatiModelul;
     private Marca selectareMarca;
     
     
@@ -56,29 +61,17 @@ public class FrmDateMasina extends javax.swing.JDialog {
         
         modelMarci = new DefaultComboBoxModel();
         modelModele = new DefaultComboBoxModel();
-        List<Marca> marci = new ArrayList<Marca>();
+        List<Marca> marci = marcaService.getAll();
         this.selectareMarca = new Marca(-1, "--Selectati marca--");
-        marci.add(selectareMarca);
-        Marca mercedes = new Marca(1, "Mercedes");
-        marci.add(mercedes);
-        Marca man = new Marca(2, "Man");
-        marci.add(man);
+        marci.add(0, selectareMarca);
         for (Marca m : marci) {
             modelMarci.addElement(m);
         }
-//        this.selectatiModelul = new Model(-1, "--Selectati modelul--", null);
-//        Model modelGLE = new Model(1, "GLE", mercedes);
-//        Model modelCLS = new Model(2, "CLS", mercedes);
-//        modele = new ArrayList<>();
-//        modele.add(modelGLE);
-//        modele.add(modelCLS);
-//        Model man1 = new Model(1, "MAN The best", man);
-//        Model man2 = new Model(2, "MAN The rest", man);
-//        modele.add(man1);
-//        modele.add(man2);
-//        modelModele.addElement(selectatiModelul);
-//        dropDownMarca.setModel(modelMarci);
-//        dropDownModel.setModel(modelModele);
+        
+        this.selectatiModelul = new Model(null, "--Selectati modelul--");
+        modelModele.addElement(selectatiModelul);
+        dropDownMarca.setModel(modelMarci);
+        dropDownModel.setModel(modelModele);
 
         //Editare
         if (tirSelectat.length > 0) {
@@ -93,7 +86,7 @@ public class FrmDateMasina extends javax.swing.JDialog {
                 listaPoze.add(new ImageIcon(new ImageIcon(f.getAbsolutePath()).getImage().getScaledInstance(lblPoze.getWidth(), lblPoze.getHeight(), Image.SCALE_SMOOTH)));
             }
             this.curImageIndex = 0;
-            lblPoze.setIcon(listaPoze.get(0));
+//            lblPoze.setIcon(listaPoze.get(0));
             lblPoze.setText("");
             modificaCntPoze();
         }
@@ -352,9 +345,9 @@ public class FrmDateMasina extends javax.swing.JDialog {
             if (dropDownMarca.getSelectedItem().equals(this.selectareMarca)) {
                 throw new Error("Va rog sa selectati o marca");
             }
-//            if (dropDownModel.getSelectedItem().equals(this.selectatiModelul)) {
-//                throw new Error("Va rog sa selectati un model");
-//            }
+            if (dropDownModel.getSelectedItem().equals(this.selectatiModelul)) {
+                throw new Error("Va rog sa selectati un model");
+            }
             if (listaPoze.isEmpty()) {
                 throw new Error("Va rog sa adaugati macar o poza");
             }
@@ -377,16 +370,20 @@ public class FrmDateMasina extends javax.swing.JDialog {
             if (tirSelectat != null) {
                 tir.setId(tirSelectat.getId());
             }
-           // tir.setMarca((Marca) dropDownMarca.getSelectedItem());
+//            tir.setMarca((Marca) dropDownMarca.getSelectedItem());
             tir.setModel((Model) dropDownModel.getSelectedItem());
             tir.setNrInmatriculare(txtNrInmatriculare.getText());
-            //tir.setPoze(listaPozeDeAfisat);
-            //tir.setFolderPoze(pozeTir);
+//            tir.setPoze(listaPozeDeAfisat);
+//            tir.setFolderPoze(pozeTir);
+
+            Stare s = new Stare();
+            s.setId(2);
+            tir.setStare(s);
 
             if (onTirSaved != null) {
                 onTirSaved.saveTir(tir);
             }
-
+            
             this.dispose();
         } catch (Error err) {
             JOptionPane.showMessageDialog(this, err.getMessage());
@@ -467,15 +464,14 @@ public class FrmDateMasina extends javax.swing.JDialog {
 
     private void dropDownMarcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_dropDownMarcaItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-//            Model selectatiModelul = (Model) modelModele.getElementAt(0);
-//            modelModele.removeAllElements();
-//            Marca marcaSelectata = (Marca) dropDownMarca.getSelectedItem();
-//            modelModele.addElement(selectatiModelul);
-//            for (Model m : modele) {
-//                if (m.getMarca().equals(marcaSelectata)) {
-//                    modelModele.addElement(m);
-//                }
-//            }
+            Model selectatiModelul = (Model) modelModele.getElementAt(0);
+            modelModele.removeAllElements();
+            Marca marcaSelectata = (Marca) dropDownMarca.getSelectedItem();
+            modelModele.addElement(selectatiModelul);
+            List<Model> modele = marcaService.getModele(marcaSelectata);
+            for (Model m : modele) {
+                modelModele.addElement(m);
+            }
         }
     }//GEN-LAST:event_dropDownMarcaItemStateChanged
 

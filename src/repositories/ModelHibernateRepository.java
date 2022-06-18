@@ -31,6 +31,7 @@ public class ModelHibernateRepository implements ModelRepository{
     public boolean adaugaModel(Model model) {
         org.hibernate.Transaction tx = session.beginTransaction();
         
+        session.clear();
         if(model != null && model.getId() > 0) {
             session.saveOrUpdate(model);
             tx.commit();
@@ -43,6 +44,7 @@ public class ModelHibernateRepository implements ModelRepository{
         } else {
             tx.rollback();
         }
+        session.clear();
         return id > 0;
     }
 
@@ -87,10 +89,13 @@ public class ModelHibernateRepository implements ModelRepository{
     
     public static void main(String[] args) {
         ModelRepository modelRepository = new ModelHibernateRepository();
-        Marca marca=new Marca();
-        marca.setId(1);
-        //modelRepository.adaugaModel(new Model(marca, "C-CLASS"));
-//        System.out.println(modelRepository.getAll());
-//          System.out.println(modelRepository.getModelById(4).getTiruris());
+        Marca m1=new Marca();
+        m1.setId(9);
+        Marca m2 = new Marca();
+        m2.setId(10);
+        modelRepository.adaugaModel(new Model(m1, "g-class"));
+        modelRepository.adaugaModel(new Model(m1, "c-class"));
+        modelRepository.adaugaModel(new Model(m2, "Spring"));
+        modelRepository.adaugaModel(new Model(m2, "Duster"));
     }    
 }

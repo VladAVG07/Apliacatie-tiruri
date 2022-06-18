@@ -67,8 +67,7 @@ public class TableModelSoferi extends AbstractTableModel {
         return listaSoferi;
     }
     
-    public void addSofer(Sofer sofer){
-        int index=listaSoferi.indexOf(sofer);
+    public void addSofer(Sofer sofer, int index){
         if(index==-1)
             listaSoferi.add(sofer);
         else{

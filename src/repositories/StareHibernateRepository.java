@@ -29,6 +29,7 @@ public class StareHibernateRepository implements StareRepository {
     public boolean adaugaStare(Stare stare) {
         org.hibernate.Transaction tx = session.beginTransaction();
 
+        session.clear();
         if (stare != null && stare.getId() > 0) {
             session.saveOrUpdate(stare);
             tx.commit();
@@ -41,6 +42,7 @@ public class StareHibernateRepository implements StareRepository {
         } else {
             tx.rollback();
         }
+        session.clear();
         return id > 0;
     }
 

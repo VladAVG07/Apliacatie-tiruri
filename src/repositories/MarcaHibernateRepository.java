@@ -27,7 +27,7 @@ public class MarcaHibernateRepository implements MarcaRepository {
     @Override
     public boolean adaugaMarca(Marca marca) {
         org.hibernate.Transaction tx = session.beginTransaction();
-
+        session.clear();
         if (marca != null && marca.getId() > 0) {
             session.saveOrUpdate(marca);
             tx.commit();
@@ -40,6 +40,7 @@ public class MarcaHibernateRepository implements MarcaRepository {
         } else {
             tx.rollback();
         }
+        session.clear();
         return id > 0;
     }
 
@@ -67,6 +68,7 @@ public class MarcaHibernateRepository implements MarcaRepository {
         String hql = "from Model m where m.marca=:marca";
         listaModele = (ArrayList<Model>) session.createQuery(hql).setParameter("marca", marca).list();
         tx.commit();
+        session.clear();
         return listaModele;
     }
 
@@ -83,9 +85,7 @@ public class MarcaHibernateRepository implements MarcaRepository {
 
     public static void main(String[] args) {
         MarcaRepository marcaRepository = new MarcaHibernateRepository();
-        //System.out.println(marcaRepository.getMarcaById(1).getModele());
-        Marca marca = new Marca();
-        marca.setId(1);
-        System.out.println(marcaRepository.getModele(marca));
+        marcaRepository.adaugaMarca(new Marca(0, "Mercedes", 1));
+        marcaRepository.adaugaMarca(new Marca(0, "Dacia", 1));
     }
 }

@@ -37,6 +37,7 @@ public class Marca  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    
     public String getNume() {
         return this.nume;
     }
@@ -95,7 +96,7 @@ public class Marca  implements java.io.Serializable {
     
     @Override
     public String toString() {
-        return "Marca{" + "id=" + id + ", nume=" + nume + ", activa=" + activa + '}';
+        return nume;
     }
 
 }

@@ -81,7 +81,7 @@ public class Model  implements java.io.Serializable {
     
     @Override
     public String toString() {
-        return "Modele{" + "id=" + id + ", marca=" + marca + ", nume=" + nume + '}';
+        return nume;
     }
     
 }

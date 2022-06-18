@@ -19,6 +19,12 @@ import javax.swing.table.TableColumn;
  */
 public class CellRendererImage implements TableCellRenderer {
 
+    private final int col;
+    
+    public CellRendererImage(int col) {
+        this.col = col;
+    }
+    
     @Override
     public Component getTableCellRendererComponent(JTable table,
             Object value,
@@ -27,7 +33,7 @@ public class CellRendererImage implements TableCellRenderer {
             int row,
             int column) {
         table.setRowHeight(70);
-        if (column == 4) {
+        if (column == col) {
             TableColumn tb = table.getColumnModel().getColumn(column);
             tb.setMaxWidth(100);
             tb.setMinWidth(100);
